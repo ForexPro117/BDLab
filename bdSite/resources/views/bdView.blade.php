@@ -11,14 +11,14 @@
                 <h2 class="accordion-header" id="heading{{$i}}">
                     <button class="accordion-button @if($i!=0)collapsed @endif" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapse{{$i}}" aria-expanded="true" aria-controls="collapse{{$i}}">
-                        Таблица: {{$Names[$i]->table_name}}
+                        Таблица: {{$Names[$i]}}
                     </button>
                 </h2>
 
                 <div id="collapse{{$i}}" class="accordion-collapse collapse @if($i==0)show @endif"
                      aria-labelledby="heading{{$i}}" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <table class="table table-striped table-hover" id="{{$Names[$i]->table_name}}">
+                        <table class="table table-striped table-hover" id="{{$Names[$i]}}">
                             <tr>
                                 @foreach($rowsName[$i] as $names)
                                     <th scope="col">{{$names->COLUMN_NAME}}</th>
