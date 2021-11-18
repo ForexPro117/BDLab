@@ -13,10 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::view('/', 'home')->name('home');
 Route::get('/bdView', [\App\Http\Controllers\BdController::class, 'createBdView'])
     ->name('bdView');
 Route::post('/regDev',function (){
-   return ['location'=>'/bdView'];
+    return ['location'=>'/bdView'];
 });
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
+require __DIR__.'/auth.php';
