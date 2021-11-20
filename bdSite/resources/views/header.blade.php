@@ -45,6 +45,12 @@
                                 <input type="password" class="form-control" name="password"
                                        placeholder="Ваш пароль">
                             </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" name="remember">
+                                <label class="form-check-label" >
+                                    Запомнить меня
+                                </label>
+                            </div>
                             <button type="submit" class="btn btn-primary">Войти</button>
                         </form>
                     </div>

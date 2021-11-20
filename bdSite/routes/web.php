@@ -14,12 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::view('/', 'home')->name('home');
+Route::view('/', 'home')
+    ->name('home');
 Route::get('/bdView', [\App\Http\Controllers\BdController::class, 'createBdView'])
     ->name('bdView');
-Route::post('/regDev',function (){
-    return ['location'=>'/bdView'];
-});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
