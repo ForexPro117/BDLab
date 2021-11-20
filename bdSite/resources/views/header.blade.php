@@ -20,50 +20,69 @@
                 <li><a href="{{route('bdView')}}" class="nav-link px-2 text-secondary">База данных</a></li>
             </ul>
             <div class="text-end nav">
-                <div>
-                    <button type="button" class="btn btn-outline-light dropdown-toggle me-2" data-bs-toggle="dropdown">Войти</button>
-                    <form class="dropdown-menu p-4">
-                        <div class="mb-3">
-                            <label for="Email" class="form-label fw-bolder">Email</label>
-                            <input type="email" class="form-control" id="Email"
-                                   placeholder="email@example.com">
-                        </div>
-                        <div class="mb-3">
-                            <label for="Password" class="form-label fw-bolder">Пароль</label>
-                            <input type="password" class="form-control" id="Password"
-                                   placeholder="Ваш пароль">
-                        </div>
-                        <button type="button" id="logBtn" class="btn btn-primary">Войти</button>
-                    </form>
-                </div>
-                <div>
-                    <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown">Регистрация
+                @if(Auth::check())
+                    <label class="nav-link px-2 text-white">{{request()->user()->email}}</label>
+                    <button type="button" class="btn btn-outline-light dropdown-toggle me-2" data-bs-toggle="dropdown">
+                        Выйти
                     </button>
-                    <form class="dropdown-menu p-4">
-                        <div class="mb-3">
-                            <label for="Email2" class="form-label fw-bolder">Email</label>
-                            <input type="email" class="form-control" id="Email2"
-                                   placeholder="email@example.com">
-                        </div>
-                        <div class="mb-3">
-                            <label for="Password2" class="form-label fw-bolder">Пароль</label>
-                            <input type="password" class="form-control" id="Password2"
-                                   placeholder="Ваш пароль">
-                        </div>
-                        <button type="button" id="regBtn" class="btn btn-success">Регистрация</button>
-                    </form>
-                </div>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{route('logout')}}">Выход</a></li>
+                    </ul>
+                @else
+                    <div>
+                        <button type="button" class="btn btn-outline-light dropdown-toggle me-2"
+                                data-bs-toggle="dropdown">Войти
+                        </button>
+                        <form method="POST" action="{{ route('loginPOST') }}" class="dropdown-menu p-4">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="Email" class="form-label fw-bolder">Email</label>
+                                <input type="email" class="form-control" name="email"
+                                       placeholder="email@example.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="Password" class="form-label fw-bolder">Пароль</label>
+                                <input type="password" class="form-control" name="password"
+                                       placeholder="Ваш пароль">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Войти</button>
+                        </form>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown">
+                            Регистрация
+                        </button>
+                        <form method="POST" action="{{ route('registerPOST') }}" class="dropdown-menu p-4">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="Email2" class="form-label fw-bolder">Email</label>
+                                <input type="email" class="form-control" name="email"
+                                       placeholder="email@example.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="Password2" class="form-label fw-bolder">Пароль</label>
+                                <input type="password" class="form-control" name="password"
+                                       placeholder="Ваш пароль">
+                            </div>
+                            <div class="mb-3">
+
+                                <input type="password" class="form-control" name="password_confirmation"
+                                       placeholder="Повторите пароль">
+                            </div>
+                            <button type="submit" class="btn btn-success">Регистрация</button>
+                        </form>
+                    </div>
+                @endauth
             </div>
         </div>
     </div>
 </header>
 <main>
     @yield("bodyContent")
-    <script src="{{ asset('js/ajaxSender.js') }}"></script>
-
 
 </main>
-<footer class="d-flex flex-wrap justify-content-around py-3 my-4 border-top @if($_SERVER["REQUEST_URI"]!="/bdView")fixed-bottom @endif">
+<footer
+    class="d-flex flex-wrap justify-content-around py-3 my-4 border-top @if($_SERVER["REQUEST_URI"]!="/bdView")fixed-bottom @endif">
     <div>
         <span class="text-muted">© 2021 Company, Inc</span>
     </div>
