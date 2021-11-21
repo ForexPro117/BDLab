@@ -21,6 +21,12 @@
             </ul>
         </div>
     @endif
-    <div class="container mt-5"><h1>Hey you!</h1></div>
+    @if(Auth::check())
+        <div class="container mt-5"><h1>Моё почтение {{request()->user()->email}}</h1></div>
+    @else()
+        <div class="container mt-5"><h1>Для редактирования,
+                нужно авторизоваться и совершить двойное нажатие по нужному столбцу!</h1></div>
+    @endauth
+
     <script src="{{ asset('js/homeBlade.js') }}"></script>
 @endsection
