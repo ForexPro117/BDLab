@@ -16,12 +16,11 @@ class BdController extends Controller
         $tablesName = ['products', 'supplieritem', 'pharmitem'];
         /*DB::select("SELECT table_name FROM information_schema.tables
 WHERE table_schema = 'bd'");*/
+        $dbName=DB::connection()->getDatabaseName();
         foreach ($tablesName as $name) {
             $data[] = DB::table("$name")->get();
-            $rowsName[] = DB::select("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '$name'AND TABLE_SCHEMA = 'bd'");
+            $rowsName[] = DB::select("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '$name'AND TABLE_SCHEMA = '$dbName'");
         }
-        /*$users=new User();
-        dd($users->all()->get(0)->email);*/
         return view('bdView', ['Names' => $tablesName, 'data' => $data, 'rowsName' => $rowsName]);
     }
 

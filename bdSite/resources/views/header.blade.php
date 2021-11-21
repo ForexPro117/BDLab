@@ -37,12 +37,12 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="Email" class="form-label fw-bolder">Email</label>
-                                <input type="email" class="form-control" name="email"
+                                <input type="email" autocomplete="on" class="form-control" name="email"
                                        placeholder="email@example.com">
                             </div>
                             <div class="mb-3">
                                 <label for="Password" class="form-label fw-bolder">Пароль</label>
-                                <input type="password" class="form-control" name="password"
+                                <input type="password" autocomplete="on" class="form-control" name="password"
                                        placeholder="Ваш пароль">
                             </div>
                             <div class="form-check mb-3">
