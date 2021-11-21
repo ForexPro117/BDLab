@@ -1,21 +1,9 @@
-/*$("#logBtn").on('click', () => $("#BDtitle").html("<h1>Ты зачем нажал на кнопку!!!!<h1>"));
-$("#regBtn").on('click', () =>
-    $.ajax({
-        url: "/regDev",
-        type: "POST",
-        data: ({_token: $('#csrf-token')[0].content, name: "artem", age: 5}),
-        dataType: "json",
-        success: (data) => {
-            location = data.location
-        }
-
-    }).fail(() => console.log("FAIL")));*/
-//dbl
 $(".dataPick").dblclick((eventData) => {
-    let myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-    let data = eventData.currentTarget.children;//array.textconent
-    let tableName = eventData.currentTarget.offsetParent.id;
-    let rowsName = eventData.currentTarget.parentElement.firstChild;
+    target = eventData;
+    myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    data = eventData.currentTarget.children;//array.textconent
+    tableName = eventData.currentTarget.offsetParent.id;
+    rowsName = eventData.currentTarget.parentElement.firstChild;
     $("#modalTitle").get(0).innerHTML = tableName;
     $("#modal-body").empty();
     for (let i = 0; i < data.length; i++) {
@@ -26,13 +14,50 @@ $(".dataPick").dblclick((eventData) => {
             $(`<input type="text" class="form-control mb-3" value="${data[i].textContent}">`).appendTo('#modal-body');
     }
     myModal.show();
-
 });
-/*
-$(".del-bnt").on('click', (eventData) =>{
+$("#btn-Change").click(() => {
+    if (confirm("Вы деийствительно хотите изменить данные?")) {
+        let strokes = $('#modal-body').find(':input');
+        let rows = new Map();
+        for (i = 0; i < strokes.length; i++) {
+            rows.set(rowsName.children[i].textContent, strokes[i].value)
+        }
+        $.ajax({
+            url: "/bdView",
+            type: "POST",
+            data: ({_token: $('#csrf-token')[0].content, 'tableName': tableName, "data": Object.fromEntries(rows)}),
+            dataType: "text"
 
-    console.log(eventData)
+        })
+            .done(() => {
+                $(`<div class="alert alert-success container" id="msg">
+            Данные успешно изменены!</div>`).prependTo('#accordionExample');
+                $('#exampleModal').modal('hide');
+                for (i = 0; i < strokes.length; i++)
+                    data[i].textContent = strokes[i].value;
+                setTimeout(() => $('#msg').remove(), 5000);
+            })
+            .fail(() => console.log("FAIL"));
+    }
 });
-*/
+$("#btn-Delete").click(() => {
+    if (confirm("Вы деийствительно хотите удалить данные?")) {
+        let strokes = $('#modal-body').find(':input');
+        $.ajax({
+            url: '/bdView/delete',
+            type: "POST",
+            data: ({_token: $('#csrf-token')[0].content, 'tableName': tableName, "ID": strokes[0].value}),
+            dataType: "text"
 
+        })
+            .done(() => {
+                $(`<div class="alert alert-danger container" id="msg">
+            Данные успешно удалены!</div>`).prependTo('#accordionExample');
+                $('#exampleModal').modal('hide');
+                target.currentTarget.remove();
+                setTimeout(() => $('#msg').remove(), 5000);
+            })
+            .fail(() => console.log("FAIL"));
+    }
+});
 

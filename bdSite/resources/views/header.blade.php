@@ -22,7 +22,7 @@
             <div class="text-end nav">
                 @if(Auth::check())
                     <label class="nav-link px-2 text-white">{{request()->user()->email}}</label>
-                    <button type="button" class="btn btn-outline-light dropdown-toggle me-2" data-bs-toggle="dropdown">
+                    <button type="button" class="btn btn-outline-light me-2" data-bs-toggle="dropdown">
                         Выйти
                     </button>
                     <ul class="dropdown-menu">

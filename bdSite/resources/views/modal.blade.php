@@ -11,8 +11,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary">Изменить</button>
-                <button type="button" class="btn btn-outline-danger">Удалить</button>
+                <button type="button" id="btn-Change" class="btn btn-primary">Изменить</button>
+                <button type="button" id="btn-Delete" class="btn btn-outline-danger">Удалить</button>
             </div>
         </div>
     </div>

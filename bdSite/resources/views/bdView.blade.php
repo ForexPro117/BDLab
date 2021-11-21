@@ -13,12 +13,12 @@
         <button type="button" class="btn-close" aria-label="Close"></button>
     </div>
 @endif
-@if(Auth::check())
+{{--@if(Auth::check())
     <div class="alert alert-success container">
         Для редактирования данных, дважды нажмите на желаемую строку!
         <button type="button" class="btn-close" aria-label="Close"></button>
     </div>
-@endif
+@endif--}}
 @if ($errors->any())
     <div class="alert alert-danger container">
         <ul>
