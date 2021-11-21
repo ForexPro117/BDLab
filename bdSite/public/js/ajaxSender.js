@@ -37,7 +37,12 @@ $("#btn-Change").click(() => {
                     data[i].textContent = strokes[i].value;
                 setTimeout(() => $('#msg').remove(), 5000);
             })
-            .fail(() => console.log("FAIL"));
+            .fail(() => {
+                $('#exampleModal').modal('hide');
+                $(`<div class="alert alert-danger container" id="msg">
+            Произошла ошибка при изменении данных!</div>`).prependTo('#accordionExample');
+                setTimeout(() => $('#msg').remove(), 5000);
+            });
     }
 });
 $("#btn-Delete").click(() => {
@@ -51,13 +56,18 @@ $("#btn-Delete").click(() => {
 
         })
             .done(() => {
-                $(`<div class="alert alert-danger container" id="msg">
+                $(`<div class="alert alert-success container" id="msg">
             Данные успешно удалены!</div>`).prependTo('#accordionExample');
                 $('#exampleModal').modal('hide');
                 target.currentTarget.remove();
                 setTimeout(() => $('#msg').remove(), 5000);
             })
-            .fail(() => console.log("FAIL"));
+            .fail(() => {
+                $('#exampleModal').modal('hide');
+                $(`<div class="alert alert-danger container" id="msg">
+            Произошла ошибка при удалении данных!</div>`).prependTo('#accordionExample');
+                setTimeout(() => $('#msg').remove(), 5000);
+            });
     }
 });
 
